@@ -4,6 +4,8 @@ import { get } from 'lodash'
 import { createSession, createAccessToken } from '../service/session.service'
 import { validateUserEmailAndPassword } from '../service/user.service'
 import config from 'config'
+import { sign } from '../utils/jwt.utils'
+
 export const createSessionHandler = async (req: Request, res: Response) => {
   try {
     //validate email & password
@@ -20,6 +22,10 @@ export const createSessionHandler = async (req: Request, res: Response) => {
 
     //create jwt access token
     const accessToken = await createAccessToken(user, session)
+    const refreshToken = await sign(session, {
+      expiresIn: '1y',
+    })
+    return res.send({ accessToken, refreshToken })
   } catch (err) {
     log.error(err)
     return res.status(500).json({
