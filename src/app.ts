@@ -16,6 +16,6 @@ const server = app.listen(port, () => {
 })
 
 process.on('unhandledRejection', (err) => {
-  log.info(`INTERNAL SERVER ERROR ===>${err}`)
+  log.error(`INTERNAL SERVER ERROR ===>${err}`)
   server.close(process.exit(1))
 })
