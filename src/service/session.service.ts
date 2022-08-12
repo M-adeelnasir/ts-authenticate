@@ -1,22 +1,11 @@
-import { UserDocument } from './../model/user.model'
-import { omit } from 'lodash'
-import User from './../model/user.model'
+import { DocumentDefinition } from 'mongoose'
 import log from '../utils/logger'
-export const validateUserEmailAndPassword = async ({
-  email,
-  password,
-}: {
-  email: UserDocument['email']
-  password: string
-}) => {
+import Session, { SessionDocument } from '../model/session.model'
+
+export const createSession = async (userId: string, userAgent: string) => {
   try {
-    const user = await User.findOne({ email })
-    if (!user) return false
-
-    const isMatch = await user.comparedPassword(password)
-
-    if (!isMatch) return false
-    return omit(user.toJSON, 'password')
+    const session = await Session.create({ user: userId, userAgent })
+    return session.toJSON()
   } catch (err: any) {
     log.error(err)
     throw new Error(err)
