@@ -5,7 +5,7 @@ import log from './utils/logger'
 import Routes from './routes'
 
 const app = express()
-app.use(express())
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const port = config.get<number>('port')
