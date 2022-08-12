@@ -10,6 +10,7 @@ export const createSessionHandler = async (req: Request, res: Response) => {
   try {
     //validate email & password
     const user = (await validateUserEmailAndPassword(req.body)) as any
+
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -23,7 +24,7 @@ export const createSessionHandler = async (req: Request, res: Response) => {
     //create jwt access token
     const accessToken = await createAccessToken(user, session)
     const refreshToken = await sign(session, {
-      expiresIn: '1y',
+      expiresIn: config.get('refreshTokenTtl'),
     })
     return res.send({ accessToken, refreshToken })
   } catch (err) {

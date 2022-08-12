@@ -29,7 +29,8 @@ export const validateUserEmailAndPassword = async ({
     const isMatch = await user.comparedPassword(password)
 
     if (!isMatch) return false
-    return omit(user.toJSON, 'password')
+
+    return omit(user.toJSON(), 'password')
   } catch (err: any) {
     log.error(err)
     throw new Error(err)
