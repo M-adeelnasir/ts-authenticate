@@ -9,6 +9,7 @@ export const requireSignIn = async (
 ) => {
   try {
     const user = get(req, 'user')
+
     if (!user) {
       return res.sendStatus(403)
     }

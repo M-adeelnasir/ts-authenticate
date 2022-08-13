@@ -18,8 +18,12 @@ const deserializUser = async (
   const { expired, decoded } = (await decode(accessToken)) as any
 
   if (decoded) {
+    // console.log('1decoded===>', decoded)
     //   @ts-ignore
     req.user = decoded
+    console.log('ITEM====1', decoded)
+    //   @ts-ignore
+    // console.log('1user===>', req.user)
     return next()
   }
 
@@ -27,12 +31,18 @@ const deserializUser = async (
 
   if (expired && refreshToken) {
     const newAccessToken = await reIssueAccessToken(refreshToken)
+
     if (newAccessToken) {
       res.setHeader('x-access-token', newAccessToken)
       const { decoded } = (await decode(newAccessToken)) as any
+      //   console.log('2decoded===>', decoded)
       console.log('-----REFRESH TOKEN-----')
       //@ts-ignore
+
       req.user = decoded
+      //   @ts-ignore
+
+      //   console.log('2user===>', req.user)
       return next()
     }
   }

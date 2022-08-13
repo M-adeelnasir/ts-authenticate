@@ -1,7 +1,11 @@
 import { Request, Response } from 'express'
 import log from '../utils/logger'
 import { get } from 'lodash'
-import { createSession, createAccessToken } from '../service/session.service'
+import {
+  createSession,
+  createAccessToken,
+  getUserSessions,
+} from '../service/session.service'
 import { validateUserEmailAndPassword } from '../service/user.service'
 import config from 'config'
 import { sign } from '../utils/jwt.utils'
@@ -28,6 +32,21 @@ export const createSessionHandler = async (req: Request, res: Response) => {
     })
     return res.send({ accessToken, refreshToken })
   } catch (err) {
+    log.error(err)
+    return res.status(500).json({
+      success: false,
+      msg: 'INTERNAL SERVER ERROR',
+    })
+  }
+}
+
+//get all sessions
+export const getUserSessionHandler = async (req: Request, res: Response) => {
+  try {
+    const userId = get(req, 'user')
+    const sessions = await getUserSessions({ user: userId, valid: true })
+    return res.send(sessions)
+  } catch (err: any) {
     log.error(err)
     return res.status(500).json({
       success: false,
