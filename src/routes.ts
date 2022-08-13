@@ -46,15 +46,13 @@ export default function (app: Express) {
   //create product
   app.post(
     '/api/product',
-    requireSignIn,
-    validateRequest(createProductScehma),
+    [requireSignIn, validateRequest(createProductScehma)],
     createProductHandler
   )
   //update update
   app.put(
     '/api/product/:productId',
-    requireSignIn,
-    validateRequest(updateProductScehma),
+    [requireSignIn, validateRequest(updateProductScehma)],
     updateProductHandler
   )
   //find product
@@ -66,8 +64,7 @@ export default function (app: Express) {
   //delete product
   app.delete(
     '/api/product/:productId',
-    requireSignIn,
-    validateRequest(deleteProductScehma),
+    [requireSignIn, validateRequest(deleteProductScehma)],
     deleteProductHandler
   )
   //all product
