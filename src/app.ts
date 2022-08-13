@@ -4,10 +4,12 @@ import connectDB from './utils/db'
 import log from './utils/logger'
 import Routes from './routes'
 import deserializUser from './middleware/deserialize.user'
+import morgan from 'morgan'
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(morgan('dev'))
 app.use(deserializUser)
 
 const port = config.get<number>('port')

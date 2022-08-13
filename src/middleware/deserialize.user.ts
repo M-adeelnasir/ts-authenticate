@@ -12,18 +12,14 @@ const deserializUser = async (
     /^Bearer\s/,
     ''
   )
-  console.log(accessToken)
   if (!accessToken) return next()
 
   const { expired, decoded } = (await decode(accessToken)) as any
 
   if (decoded) {
-    // console.log('1decoded===>', decoded)
     //   @ts-ignore
     req.user = decoded
-    console.log('ITEM====1', decoded)
     //   @ts-ignore
-    // console.log('1user===>', req.user)
     return next()
   }
 

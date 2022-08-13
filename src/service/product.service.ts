@@ -29,6 +29,7 @@ export const updateProduct = async (
 ) => {
   try {
     const product = await Product.findOneAndUpdate(query, update, options)
+
     return product
   } catch (err: any) {
     log.error(err)
@@ -52,7 +53,7 @@ export const findProduct = async (
   options: QueryOptions = { lean: true }
 ) => {
   try {
-    const product = await Product.findOne(query, {}, options)
+    const product = await Product.findOne({ _id: query }, {}, options)
     return product
   } catch (err: any) {
     log.error(err)

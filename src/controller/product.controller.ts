@@ -12,7 +12,8 @@ import log from '../utils/logger'
 //create product
 export const createProductHandler = async (req: Request, res: Response) => {
   try {
-    const product = await createProduct(req.body)
+    const user = get(req, 'user._id')
+    const product = await createProduct({ ...req.body, user })
     return res.status(201).json({
       success: true,
       product,
@@ -36,7 +37,8 @@ export const updateProductHandler = async (req: Request, res: Response) => {
         msg: 'Product Create Failed',
       })
     }
-    return res.status(204).json({
+
+    return res.json({
       success: true,
       product,
     })
@@ -100,6 +102,7 @@ export const deleteProductHandler = async (req: Request, res: Response) => {
 export const allProductHandler = async (req: Request, res: Response) => {
   try {
     const products = await allProducts()
+
     return res.json({
       success: true,
       products,
