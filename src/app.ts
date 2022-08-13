@@ -1,16 +1,9 @@
-import express from 'express'
 import config from 'config'
 import connectDB from './utils/db'
 import log from './utils/logger'
-import Routes from './routes'
-import deserializUser from './middleware/deserialize.user'
-import morgan from 'morgan'
+import { createServer } from './utils/server'
 
-const app = express()
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(morgan('dev'))
-app.use(deserializUser)
+const app = createServer()
 
 const port = config.get<number>('port')
 const host = config.get<string>('host')
@@ -18,7 +11,6 @@ const host = config.get<string>('host')
 const server = app.listen(port, () => {
   log.info(`Server is up on http://${host}:${port}`)
   connectDB()
-  Routes(app)
 })
 
 process.on('unhandledRejection', (err) => {
