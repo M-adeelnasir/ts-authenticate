@@ -42,7 +42,9 @@ export const reIssueAccessToken = async (token: string) => {
   if (!session || !session?.valid) return false
 
   //find the user
-  const user = await User.findById({ _id: session.user }).lean()
+  const user = await User.findById({ _id: session.user })
+    .select('-password')
+    .lean()
   if (!user) return false
 
   //and again genrate a token
@@ -56,6 +58,19 @@ export const getUserSessions = async (query: FilterQuery<SessionDocument>) => {
   try {
     const sessions = await Session.find(query)
     return sessions
+  } catch (err: any) {
+    log.error(err)
+    throw new Error(err)
+  }
+}
+
+//update logout session
+export const updateSession = async (
+  query: FilterQuery<SessionDocument>,
+  input: any
+) => {
+  try {
+    return await Session.findByIdAndUpdate(query, input)
   } catch (err: any) {
     log.error(err)
     throw new Error(err)

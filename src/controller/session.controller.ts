@@ -5,6 +5,7 @@ import {
   createSession,
   createAccessToken,
   getUserSessions,
+  updateSession,
 } from '../service/session.service'
 import { validateUserEmailAndPassword } from '../service/user.service'
 import config from 'config'
@@ -47,6 +48,22 @@ export const getUserSessionHandler = async (req: Request, res: Response) => {
     const sessions = await getUserSessions({ user: userId, valid: true })
     return res.send(sessions)
   } catch (err: any) {
+    log.error(err)
+    return res.status(500).json({
+      success: false,
+      msg: 'INTERNAL SERVER ERROR',
+    })
+  }
+}
+
+//get delete session
+export const deleteUserSessionHandler = async (req: Request, res: Response) => {
+  try {
+    const sessionId = get(req, 'user.session')
+    await updateSession({ _id: sessionId }, { valid: false })
+
+    return res.sendStatus(200)
+  } catch (err) {
     log.error(err)
     return res.status(500).json({
       success: false,

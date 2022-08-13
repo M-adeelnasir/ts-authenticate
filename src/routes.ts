@@ -5,6 +5,7 @@ import { createUserHandler } from './controller/user.controller'
 import {
   createSessionHandler,
   getUserSessionHandler,
+  deleteUserSessionHandler,
 } from './controller/session.controller'
 import { requireSignIn } from './middleware/requireSignin'
 
@@ -25,4 +26,7 @@ export default function (app: Express) {
   )
   //get all sessions
   app.get('/api/session', requireSignIn, getUserSessionHandler)
+
+  //logout session
+  app.delete('/api/session', requireSignIn, deleteUserSessionHandler)
 }
