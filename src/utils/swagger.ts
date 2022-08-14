@@ -40,7 +40,7 @@ function swaggerDocs(app: Express, port: number) {
     res.setHeader('COntent-Type', 'application/json')
     res.send(swaggerDocument)
   })
-  log.info('Docs are available on http://localhost:4003')
+  log.info(`Docs are available on http://localhost:${port}/docs`)
 }
 
 export default swaggerDocs
