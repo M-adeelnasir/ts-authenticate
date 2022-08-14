@@ -15,13 +15,11 @@ export const createProductHandler = async (req: Request, res: Response) => {
     const user = get(req, 'user._id')
     const product = await createProduct({ ...req.body, user })
     return res.status(201).json({
-      success: true,
       product,
     })
   } catch (err: any) {
     log.error(err)
     return res.status(500).json({
-      success: false,
       msg: 'INTERNAL SERVER ERROR',
     })
   }
