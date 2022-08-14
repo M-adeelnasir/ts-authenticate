@@ -71,9 +71,15 @@ export const findProduct = async (
 
 //find all products
 export const allProducts = async () => {
+  const matricsLabels = {
+    operation: 'allProducts',
+  }
+  const timer = databaseResponseTimeHistogram.startTimer()
   try {
+    timer({ ...matricsLabels, success: 'true' })
     return await Product.find({})
   } catch (err: any) {
+    timer({ ...matricsLabels, success: 'false' })
     log.error(err)
     throw new Error(err)
   }
