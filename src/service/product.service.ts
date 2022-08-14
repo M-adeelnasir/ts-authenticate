@@ -61,7 +61,7 @@ export const findProduct = async (
   options: QueryOptions = { lean: true }
 ) => {
   try {
-    const product = await Product.findOne(query, {}, options)
+    const product = await Product.findById(query, {}, options)
     return product
   } catch (err: any) {
     log.error(err)

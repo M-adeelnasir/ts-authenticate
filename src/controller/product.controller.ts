@@ -53,6 +53,8 @@ export const updateProductHandler = async (req: Request, res: Response) => {
 export const findProductHandler = async (req: Request, res: Response) => {
   try {
     const productId = get(req, 'params.productId')
+    console.log(productId)
+
     const product = await findProduct(productId)
     if (!product) {
       return res.status(404).json({

@@ -126,7 +126,7 @@ export default function (app: Express) {
 
   /**
    * @openapi
-   * /api/product/{produtuctId}:
+   * /api/product/{productId}:
    *  get:
    *     tags:
    *        - Product
@@ -165,6 +165,28 @@ export default function (app: Express) {
     validateRequest(findProductScehma),
     findProductHandler
   )
+
+  /**
+   * @openapi
+   * /api/product/{productId}:
+   *  delete:
+   *    tags:
+   *      - Product
+   *    summary: Delete a product by productId
+   *    parameters:
+   *        - name: productId
+   *          required: true
+   *          in: path
+   *          description: The id of product
+   *    responses:
+   *      '200':
+   *        description: Success
+   *      '400':
+   *        description: Bad Resquest
+   *      '403':
+   *        description: You must be login (forbiden request)
+   */
+
   //delete product
   app.delete(
     '/api/product/:productId',
