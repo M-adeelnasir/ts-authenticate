@@ -23,10 +23,22 @@ import {
 import { requireSignIn } from './middleware/requireSignin'
 
 export default function (app: Express) {
+  //awager docs
+
+  /**
+   * @openapi
+   * /healthcheck:
+   *  get:
+   *     tags:
+   *       - Healthcheck
+   *     description: Respond if the app is up and running
+   *     responses:
+   *       200:
+   *         description: App is up and runing.
+   */
+
   //test end point
-  app.get('/', requireSignIn, (req: Request, res: Response) =>
-    res.sendStatus(200)
-  )
+  app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
 
   //create user
   app.post('/api/users', validateRequest(userCreateSchema), createUserHandler)
