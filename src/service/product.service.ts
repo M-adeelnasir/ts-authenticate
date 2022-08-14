@@ -10,7 +10,9 @@ import log from '../utils/logger'
 
 //create Product
 export const createProduct = async (
-  input: DocumentDefinition<Omit<ProductDocument, 'createdAt' | 'updatedAt'>>
+  input: DocumentDefinition<
+    Omit<ProductDocument, 'createdAt' | 'updatedAt' | 'productId'>
+  >
 ) => {
   try {
     const product = await Product.create(input)
@@ -53,7 +55,7 @@ export const findProduct = async (
   options: QueryOptions = { lean: true }
 ) => {
   try {
-    const product = await Product.findOne({ _id: query }, {}, options)
+    const product = await Product.findOne(query, {}, options)
     return product
   } catch (err: any) {
     log.error(err)

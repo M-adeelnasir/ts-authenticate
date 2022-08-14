@@ -68,9 +68,9 @@ export const findProductHandler = async (req: Request, res: Response) => {
     })
   } catch (err: any) {
     log.error(err)
-    return res.status(500).json({
+    return res.status(404).json({
       success: false,
-      msg: 'INTERNAL SERVER ERROR',
+      msg: 'PRODUCT NOT FOUND',
     })
   }
 }
