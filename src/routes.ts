@@ -117,6 +117,7 @@ export default function (app: Express) {
     [requireSignIn, validateRequest(createProductScehma)],
     createProductHandler
   )
+
   //update update
   app.put(
     '/api/product/:productId',

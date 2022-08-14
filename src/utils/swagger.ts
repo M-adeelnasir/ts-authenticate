@@ -11,8 +11,8 @@ const options: swaggerJsDoc.Options = {
       title: 'Express API with typescript',
       version: '1.0.0',
     },
-    componets: {
-      securitySchemas: {
+    components: {
+      securitySchemes: {
         bearerAuth: {
           type: 'http',
           scheme: 'bearer',
