@@ -9,10 +9,10 @@ const app = createServer()
 const port = config.get<number>('port')
 const host = config.get<string>('host')
 
-const server = app.listen(port, () => {
+const server = app.listen(port, async () => {
   log.info(`Server is up on http://${host}:${port}`)
-  connectDB()
   startMetricsServer()
+  await connectDB()
 })
 
 process.on('unhandledRejection', (err) => {
