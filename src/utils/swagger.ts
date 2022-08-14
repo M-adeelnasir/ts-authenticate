@@ -36,7 +36,7 @@ function swaggerDocs(app: Express, port: number) {
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
   //DOCS in JSON formate
-  app.get('docs.json', (req: Request, res: Response) => {
+  app.get('/docs.json', (req: Request, res: Response) => {
     res.setHeader('COntent-Type', 'application/json')
     res.send(swaggerDocument)
   })

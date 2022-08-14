@@ -94,23 +94,10 @@ export default function (app: Express) {
    *          description: Conflict
    */
 
-  //    *           description: Success
-  //  *           content:
-  //  *             application/json:
-  //  *               schema:
-  //  *                 type: object
-  //  *                 properties:
-  //  *                  name: string
-  //  *                  email: string
-  //  *                  createdAt: string
-  //  *                  updatedAt: string
-  //  *          '409':
-  //  *            description: Conflict
-  //  *          '400':
-  //  *            description: Bad Request
-
   //create user
   app.post('/api/users', validateRequest(userCreateSchema), createUserHandler)
+
+  //swagger for create seesion route
 
   //login session
   app.post(
@@ -136,6 +123,42 @@ export default function (app: Express) {
     [requireSignIn, validateRequest(updateProductScehma)],
     updateProductHandler
   )
+
+  /**
+   * @openapi
+   * /api/product/{produtuctId}:
+   *  get:
+   *     tags:
+   *        - Product
+   *     summary: Get a single product by productId
+   *     parameters:
+   *      - name: productId
+   *        in: path
+   *        description: The id of the product
+   *        required: true
+   *     responses:
+   *       '200':
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               required:
+   *                 - title
+   *                 - description
+   *                 - price
+   *                 - image
+   *               properties:
+   *                 title:
+   *                   type: string
+   *                 description:
+   *                   type: string
+   *                 price:
+   *                   type: string
+   *                 image:
+   *                   type: string
+   */
+
   //find product
   app.get(
     '/api/product/:productId',
