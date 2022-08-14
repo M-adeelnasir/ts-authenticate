@@ -26,7 +26,7 @@ const options: swaggerJsDoc.Options = {
       },
     ],
   },
-  apis: ['./src/routes.ts', './src/shema/*.ts'],
+  apis: ['./src/routes.ts', './src/schema/*.ts'],
 }
 
 const swaggerDocument = swaggerJsDoc(options)
@@ -37,7 +37,7 @@ function swaggerDocs(app: Express, port: number) {
 
   //DOCS in JSON formate
   app.get('/docs.json', (req: Request, res: Response) => {
-    res.setHeader('COntent-Type', 'application/json')
+    res.setHeader('Content-Type', 'application/json')
     res.send(swaggerDocument)
   })
   log.info(`Docs are available on http://localhost:${port}/docs`)

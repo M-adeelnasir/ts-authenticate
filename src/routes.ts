@@ -171,6 +171,39 @@ export default function (app: Express) {
     [requireSignIn, validateRequest(deleteProductScehma)],
     deleteProductHandler
   )
+
+  /**
+   * @openapi
+   * /api/products:
+   *  get:
+   *    tags:
+   *      - Products
+   *    summary: Get all Products
+   *    responses:
+   *      '200':
+   *        description: Success
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              items:
+   *                type: object
+   *                required:
+   *                  - title
+   *                  - description
+   *                  - price
+   *                  - image
+   *                properties:
+   *                  title:
+   *                       type: string
+   *                  description:
+   *                       type: string
+   *                  price:
+   *                       type: string
+   *                  image:
+   *                       type: string
+   */
+
   //all product
   app.get('/api/products', allProductHandler)
 }
