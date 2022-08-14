@@ -2,6 +2,7 @@ import config from 'config'
 import connectDB from './utils/db'
 import log from './utils/logger'
 import { createServer } from './utils/server'
+import { startMetricsServer } from './utils/metrics'
 
 const app = createServer()
 
@@ -11,6 +12,7 @@ const host = config.get<string>('host')
 const server = app.listen(port, () => {
   log.info(`Server is up on http://${host}:${port}`)
   connectDB()
+  startMetricsServer()
 })
 
 process.on('unhandledRejection', (err) => {
