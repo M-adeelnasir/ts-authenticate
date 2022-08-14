@@ -40,6 +40,75 @@ export default function (app: Express) {
   //test end point
   app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
 
+  /**
+   * @openapi
+   * /api/users:
+   *  post:
+   *     tags:
+   *       - User
+   *     summary: Adds a new user
+   *     requestBody:
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             required:
+   *               - name
+   *               - email
+   *               - password
+   *               - passwordConfirmation
+   *             properties:
+   *               name:
+   *                   type: string
+   *                   default: adeel
+   *               email:
+   *                   type: string
+   *                   default: adnasirskbw@gmail.com
+   *               password:
+   *                   type: string
+   *                   default: strongPasssword123
+   *               passwordConfirmation:
+   *                   type: string
+   *                   default: strongPassword123
+   *     responses:
+   *        '200':
+   *          description: Success
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  _id:
+   *                      type: string
+   *                  name:
+   *                      type: string
+   *                  email:
+   *                      type: string
+   *                  createdAt:
+   *                      type: string
+   *                  updateAt:
+   *                      type: string
+   *        '400':
+   *          description: Bad Request
+   *        '409':
+   *          description: Conflict
+   */
+
+  //    *           description: Success
+  //  *           content:
+  //  *             application/json:
+  //  *               schema:
+  //  *                 type: object
+  //  *                 properties:
+  //  *                  name: string
+  //  *                  email: string
+  //  *                  createdAt: string
+  //  *                  updatedAt: string
+  //  *          '409':
+  //  *            description: Conflict
+  //  *          '400':
+  //  *            description: Bad Request
+
   //create user
   app.post('/api/users', validateRequest(userCreateSchema), createUserHandler)
 

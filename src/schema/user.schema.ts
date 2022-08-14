@@ -1,5 +1,31 @@
 import { ref, object, string } from 'yup'
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *          - name
+ *          - email
+ *          - password
+ *          - passwordConfirmation
+ *       properties:
+ *         name:
+ *             type: string
+ *             default: adeel nasir
+ *         email:
+ *             type: string
+ *             default: adnasirkbw@gmail.com
+ *         password:
+ *             type: string
+ *             default: strongPassword123
+ *         passwordConfirmation:
+ *             type: string
+ *             default: strongPassword123
+ */
+
 export const userCreateSchema = object({
   body: object({
     name: string().required('Name in required'),
