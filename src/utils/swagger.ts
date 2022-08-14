@@ -29,4 +29,18 @@ const options: swaggerJsDoc.Options = {
   apis: ['./src/routes.ts', './src/shema/*.ts'],
 }
 
-const openapiSpecification = swaggerJsDoc(options)
+const swaggerDocument = swaggerJsDoc(options)
+
+function swaggerDocs(app: Express, port: number) {
+  //swager page
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+  //DOCS in JSON formate
+  app.get('docs.json', (req: Request, res: Response) => {
+    res.setHeader('COntent-Type', 'application/json')
+    res.send(swaggerDocument)
+  })
+  log.info('Docs are available on http://localhost:4003')
+}
+
+export default swaggerDocs
