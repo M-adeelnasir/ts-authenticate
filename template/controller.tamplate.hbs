@@ -1,0 +1,15 @@
+import { get } from 'lodash';
+import { Response, Request } from 'express';
+import log from '../utils/logger';
+
+export const yourContollerHandler = async (req: Request, res: Response) => {
+    try {
+        //handle logic
+
+    } catch (err: any) {
+        //hanlde errors
+      log.error(err)
+      throw new Error(err)
+    }
+
+}

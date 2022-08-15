@@ -6,11 +6,19 @@ export default function (plop) {
             type: 'input',
             name: 'name',
             message: 'Name you model: '
+        }, {
+            type: 'input',
+            name: 'name',
+            message: 'Name you Controller: '
         }],
         actions: [{
             type: 'add',
             path: 'src/model/{{snakeCase name}}.model.ts',
             templateFile: 'template/model.tamplate.hbs'
+        }, {
+            type: 'add',
+            path: 'src/contoller/{{snakeCase name}}.controller.ts',
+            templateFile: 'template/controller.tamplate.hbs'
         }]
     });
     plop.setHelper('titleCase', (str) => {

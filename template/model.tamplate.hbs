@@ -4,11 +4,11 @@ export interface {{titleCase name}}Document extends mongoose.Document {
 
 }
 
-const {{snakeCase name }}Schema = new mongoose.Schema(
+const {{snakeCase name}}Schema = new mongoose.Schema(
     {
     },
   { timestamps: true }
 )
 
-const {{titleCase name }} = mongoose.model < {{titleCase name }}Document > ('{{titleCase name}}', {{snakeCase name }}Schema)
-export default {{titleCase name }}
+const {{titleCase name}} = mongoose.model<{{titleCase name}}Document>('{{titleCase name}}', {{snakeCase name}}Schema)
+export default {{titleCase name}}
