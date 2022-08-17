@@ -1,7 +1,11 @@
 import jwt, { SignOptions } from 'jsonwebtoken'
 import config from 'config'
 
-const privateKey = config.get('privateKey') as string
+const privateKey = Buffer.from(
+  config.get<string>('privateKey'),
+  'base64'
+).toString('ascii')
+
 export const sign = async (input: Object, options?: SignOptions) => {
   const token = await jwt.sign(input, privateKey, options)
   return token

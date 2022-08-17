@@ -1,10 +1,13 @@
-import config from 'config'
-import connectDB from './utils/db'
-import log from './utils/logger'
 import { createServer } from './utils/server'
+import dotenv from 'dotenv'
+import config from 'config'
 import { startMetricsServer } from './utils/metrics'
 import swaggerDocs from './utils/swagger'
+import connectDB from './utils/db'
+import log from './utils/logger'
 const app = createServer()
+
+dotenv.config()
 
 const port = config.get<number>('port')
 const host = config.get<string>('host')
