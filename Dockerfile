@@ -12,10 +12,10 @@ RUN cd tmp && yarn install
 
 ADD ./ /src
 
-RUN rm -rf src/node_modules && cp -a /tem/node_modules
+RUN rm -rf src/node_modules && cp -a /tmp/node_modules /src/
 
 WORKDIR /src
 
 RUN yarn build
 
-CMD ["node","/build/src/app.js"]
+CMD ["node", "build/src/app.js"]

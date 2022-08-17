@@ -3,6 +3,9 @@ import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 // import { version } from '../../pakage.json'
 import log from './logger'
+import config from 'config'
+
+const host = config.get<string>('host')
 
 const options: swaggerJsDoc.Options = {
   definition: {
@@ -40,7 +43,7 @@ function swaggerDocs(app: Express, port: number) {
     res.setHeader('Content-Type', 'application/json')
     res.send(swaggerDocument)
   })
-  log.info(`Docs are available on http://localhost:${port}/docs`)
+  log.info(`Docs are available on http://${host}:${port}/docs`)
 }
 
 export default swaggerDocs

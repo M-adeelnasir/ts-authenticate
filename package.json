@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "test": "jest",
-    "gen": "plop"
+    "gen": "plop",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/jest": "27.0.2",

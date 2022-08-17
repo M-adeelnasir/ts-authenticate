@@ -1,8 +1,11 @@
 import express from 'express'
 import client from 'prom-client'
 import log from './logger'
+import config from 'config'
 
 const app = express()
+
+const host = config.get<string>('host')
 
 export const restResponseTimeHistogram = new client.Histogram({
   name: 'rest_response_time_duration_seconds',
@@ -28,6 +31,6 @@ export function startMetricsServer() {
   })
 
   app.listen(9001, () => {
-    log.info('Metrics server started at http://localhost:9100')
+    log.info(`Metrics server started at http://${host}:9100`)
   })
 }
