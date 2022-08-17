@@ -12,6 +12,9 @@ dotenv.config()
 const port = config.get<number>('port')
 const host = config.get<string>('host')
 
+const dbURI = config.get<string>('dbURI')
+console.log(dbURI)
+
 const server = app.listen(port, async () => {
   log.info(`Server is up on http://${host}:${port}`)
   startMetricsServer()
