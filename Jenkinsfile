@@ -4,9 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application ...'
-                nodejs('node-16.16') {
-                    sh 'yarn install'
-                }
+                sh 'docker-compose build'
             }
         }
         stage('Test') {
