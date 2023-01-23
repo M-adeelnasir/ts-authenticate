@@ -4,6 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application ...'
+                nodejs('node-16.16') {
+                    sh 'yarn install'
+                }
             }
         }
         stage('Test') {
