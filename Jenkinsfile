@@ -1,10 +1,9 @@
 pipeline {
-    agent any
+    agent { dockerfile true }
     stages {
         stage('Build') {
             steps {
                 echo 'Building the application ...'
-                sh 'docker-compose build'
             }
         }
         stage('Test') {
