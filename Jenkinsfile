@@ -1,10 +1,10 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
         stage('Build') {
             steps {
                 echo 'Building the application ...'
-                sh 'docker --version'
+                sh 'docker build -t myapp:latest .'
                 
             }
         }
